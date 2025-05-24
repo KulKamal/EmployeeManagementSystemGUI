@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,19 @@ public class EmployeeManagementGUI {
         this.ems = ems;
         createAndShowGUI();
     }
+    
+    //method to sort data by ID
+    private void sortEmployeesById() {
+        List<Employee> employees = ems.getEmployees();
+        employees.sort(Comparator.comparing(Employee::getId)); 
+    }
+    
+    //method to sort data by Name
+    private void sortEmployeesByName() {
+        List<Employee> employees = ems.getEmployees();
+        employees.sort(Comparator.comparing(Employee::getName)); 
+    }
+
 
     private void createAndShowGUI() {
         JFrame frame = new JFrame("Employee Management System");
@@ -31,10 +45,11 @@ public class EmployeeManagementGUI {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(0, 2));
 
-        // Load Employees Button
-        JButton loadButton = new JButton("Load Employees");
+        // Load Data from file Button
+        JButton loadButton = new JButton("Load Data");
         loadButton.addActionListener(e -> {
             ems.loadEmployees();
+            sortEmployeesById();                      // Sort by ID after loading
             displayEmployees();
         });
         buttonPanel.add(loadButton);
@@ -61,7 +76,7 @@ public class EmployeeManagementGUI {
 
         // List All Employees Button
         JButton listButton = new JButton("List All Employees");
-        listButton.addActionListener(e -> displayEmployees());
+        listButton.addActionListener(e -> displayEmployeesByName());
         buttonPanel.add(listButton);
 
         // Manage Performance Button
@@ -98,6 +113,21 @@ public class EmployeeManagementGUI {
             }
         }
     }
+    
+    private void displayEmployeesByName() {
+        textArea.setText(""); // Clear previous text
+        List<Employee> employees = ems.getEmployees(); // Get all employees
+        sortEmployeesByName();									//sort data by Name in Ascending order
+        if (employees.isEmpty()) {
+            textArea.append("No employees found.\n");
+        } else {
+            for (Employee emp : employees) {
+                textArea.append(emp.toString() + "\n");
+            }
+        }
+    }
+    
+    
 
     private void addEmployee() {
         // Implement the logic to add an employee using a dialog

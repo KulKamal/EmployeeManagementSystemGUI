@@ -15,6 +15,9 @@ public class EmployeeManagementSystem {
         return employees; // Return the list of employees
     }
     
+   
+
+    
     public void loadEmployees() {
         employees.clear();
         File file = new File(dataFile);
@@ -179,6 +182,8 @@ public class EmployeeManagementSystem {
             System.out.println(emp.toString());
         }
     }
+    
+    
 
     public void updateEmployee(String id, String name, String department, double baseSalary) {
         Employee emp = findEmployeeById(id);

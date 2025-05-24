@@ -190,12 +190,21 @@ public class EmployeeManagementGUI {
         JOptionPane.showMessageDialog(null, "Employee updated successfully.");
     }
 
+    
+    
     private void deleteEmployee() {
         String id = JOptionPane.showInputDialog("Enter employee ID to delete:");
-        ems.removeEmployee(id);
-        JOptionPane.showMessageDialog(null, "Employee removed successfully.");
+        Employee emp = ems.findEmployeeById(id);
+        if (emp != null) {
+        	ems.removeEmployee(id);
+            JOptionPane.showMessageDialog(null, "Employee removed successfully.");        } else {
+            JOptionPane.showMessageDialog(null, "Employee not found.");
+        }
     }
 
+    
+    
+    
     private void queryEmployee() {
         String id = JOptionPane.showInputDialog("Enter employee ID:");
         Employee emp = ems.findEmployeeById(id);

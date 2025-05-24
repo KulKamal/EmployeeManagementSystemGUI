@@ -75,7 +75,7 @@ public class EmployeeManagementGUI {
         buttonPanel.add(queryButton);
 
         // List All Employees Button
-        JButton listButton = new JButton("List All Employees");
+        JButton listButton = new JButton("Sort by Name");
         listButton.addActionListener(e -> displayEmployeesByName());
         buttonPanel.add(listButton);
 
@@ -85,7 +85,7 @@ public class EmployeeManagementGUI {
         buttonPanel.add(managePerformanceButton);
 
         // Save Employees Button
-        JButton saveButton = new JButton("Save Employees");
+        JButton saveButton = new JButton("Save Data");
         saveButton.addActionListener(e -> {
             ems.saveEmployees();
             JOptionPane.showMessageDialog(frame, "Employee data saved successfully.");
@@ -128,6 +128,10 @@ public class EmployeeManagementGUI {
     }
     
     
+    
+    
+    
+    
 
     private void addEmployee() {
         // Implement the logic to add an employee using a dialog
@@ -162,6 +166,8 @@ public class EmployeeManagementGUI {
             JOptionPane.showMessageDialog(null, "Employee added successfully.");
         }
     }
+
+
 
     private void updateEmployee() {
         String id = JOptionPane.showInputDialog("Enter employee ID to update:");
